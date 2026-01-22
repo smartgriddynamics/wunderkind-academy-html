@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wunderkind Academy | Nurturing Young Minds for a Brighter Future</title>
+    <!-- Favicon for Chrome tab -->
+    <link rel="icon" type="image/png" href="wunderkindscho-logo.PNG">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -234,6 +236,132 @@
             z-index: 1001;
             background: none;
             border: none;
+            transition: var(--transition);
+        }
+        
+        /* Mobile Navigation Overlay */
+        .mobile-nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .mobile-nav-overlay.active {
+            opacity: 1;
+        }
+        
+        /* Mobile Navigation Panel */
+        .mobile-nav-panel {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            max-width: 400px;
+            height: 100%;
+            background-color: var(--white);
+            z-index: 1000;
+            padding: 30px;
+            overflow-y: auto;
+            transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 5px 0 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .mobile-nav-panel.active {
+            left: 0;
+        }
+        
+        .mobile-nav-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .mobile-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .mobile-logo-img {
+            height: 45px;
+            width: auto;
+        }
+        
+        .mobile-logo-name {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark-text);
+        }
+        
+        .mobile-logo-name strong {
+            color: var(--primary-blue);
+        }
+        
+        .mobile-nav-links {
+            list-style: none;
+            flex-grow: 1;
+        }
+        
+        .mobile-nav-links li {
+            margin-bottom: 20px;
+        }
+        
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-size: 1.2rem;
+            font-weight: 500;
+            display: block;
+            padding: 10px 15px;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        .mobile-nav-links a:hover {
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
+            transform: translateX(5px);
+        }
+        
+        .mobile-nav-footer {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .mobile-nav-cta {
+            display: block;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .mobile-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-text);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .mobile-close-btn:hover {
+            color: var(--primary-blue);
+            transform: rotate(90deg);
         }
         
         /* Hero Section */
@@ -477,6 +605,10 @@
             padding: 60px 0 30px;
         }
         
+        footer .logo {
+            margin-bottom: 20px;
+        }
+        
         footer .logo-img {
             height: 42px;
         }
@@ -504,6 +636,12 @@
         
         .footer-column a:hover {
             color: var(--warm-yellow);
+        }
+        
+        /* Reduced font size for email specifically */
+        .footer-email {
+            font-size: 0.95rem;
+            word-break: break-all;
         }
         
         .social-icons {
@@ -536,6 +674,25 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #b0b8c9;
             font-size: 0.9rem;
+        }
+        
+        /* Footer logo with name */
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo-name {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .footer-logo-name strong {
+            color: var(--warm-yellow);
         }
         
         /* Animations */
@@ -576,34 +733,7 @@
                 display: block;
             }
             
-            .nav-links {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background-color: var(--white);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                padding: 20px 0;
-                transform: translateX(-100%);
-                opacity: 0;
-                transition: var(--transition);
-                z-index: 999;
-            }
-            
-            .nav-links.active {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            
-            .nav-links li {
-                margin: 15px 0;
-                margin-left: 0;
-            }
-            
-            .nav-cta {
+            .nav-links, .nav-cta {
                 display: none;
             }
             
@@ -629,6 +759,10 @@
             
             .logo-img {
                 height: 40px;
+            }
+            
+            .mobile-nav-overlay {
+                display: block;
             }
         }
         
@@ -656,10 +790,45 @@
             .footer-content {
                 grid-template-columns: 1fr;
             }
+            
+            .mobile-nav-panel {
+                width: 85%;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobileOverlay"></div>
+    
+    <!-- Mobile Navigation Panel -->
+    <div class="mobile-nav-panel" id="mobileNavPanel">
+        <button class="mobile-close-btn" id="mobileCloseBtn">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="mobile-nav-header">
+            <div class="mobile-logo">
+                <img src="wunderkindscho-logo.PNG" alt="Wunderkind Academy Logo" class="mobile-logo-img">
+                <div class="mobile-logo-name">Wunderkind <strong>Academy</strong></div>
+            </div>
+        </div>
+        
+        <ul class="mobile-nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#programs">Programs</a></li>
+            <li><a href="#why-us">Why Choose Us</a></li>
+            <li><a href="#facilities">Facilities</a></li>
+            <li><a href="#student-life">Student Life</a></li>
+            <li><a href="#admissions">Admissions</a></li>
+        </ul>
+        
+        <div class="mobile-nav-footer">
+            <a href="https://school-management.example.com" target="_blank" class="btn btn-primary mobile-nav-cta">Management System Login</a>
+        </div>
+    </div>
+
     <!-- Header & Navigation -->
     <header id="header">
         <div class="container">
@@ -683,7 +852,7 @@
                     <a href="https://school-management.example.com" target="_blank" class="btn btn-primary">Management System Login</a>
                 </div>
                 
-                <button class="mobile-menu-btn">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <i class="fas fa-bars"></i>
                 </button>
             </nav>
@@ -954,8 +1123,9 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <div class="logo">
+                    <div class="footer-logo">
                         <img src="wunderkindscho-logo.PNG" alt="Wunderkind Academy Logo" class="logo-img">
+                        <div class="footer-logo-name">Wunderkind <strong>Academy</strong></div>
                     </div>
                     <p>Nurturing Young Minds for a Brighter Future since 2005.</p>
                     
@@ -971,7 +1141,8 @@
                     <h3>Contact Us</h3>
                     <p><i class="fas fa-map-marker-alt"></i> Kishiri Mwanza Tanzania</p>
                     <p><i class="fas fa-phone"></i> +255 749 281 607</p>
-                    <p><i class="fas fa-envelope"></i> director@wunderkindacademyschool.org</p>
+                    <!-- Email with reduced font size -->
+                    <p class="footer-email"><i class="fas fa-envelope"></i> director@wunderkindacademyschool.org</p>
                     <p><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 5:00 PM</p>
                 </div>
                 
@@ -986,39 +1157,41 @@
             </div>
             
             <div class="copyright">
-                <p>&copy; 2023 Wunderkind Academy. All rights reserved.</p>
+                <p>&copy; 2026 Wunderkind Academy. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            const navLinks = document.querySelector('.nav-links');
-            const icon = this.querySelector('i');
-            
-            navLinks.classList.toggle('active');
-            if (navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+        const mobileNavPanel = document.getElementById('mobileNavPanel');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const body = document.body;
+
+        // Open mobile menu
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileNavPanel.classList.add('active');
+            mobileOverlay.classList.add('active');
+            body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
         });
-        
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                const navLinks = document.querySelector('.nav-links');
-                const menuBtnIcon = document.querySelector('.mobile-menu-btn i');
-                
-                navLinks.classList.remove('active');
-                menuBtnIcon.classList.remove('fa-times');
-                menuBtnIcon.classList.add('fa-bars');
-            });
+
+        // Close mobile menu
+        function closeMobileMenu() {
+            mobileNavPanel.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            body.style.overflow = ''; // Restore scrolling
+        }
+
+        mobileCloseBtn.addEventListener('click', closeMobileMenu);
+        mobileOverlay.addEventListener('click', closeMobileMenu);
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
         });
-        
+
         // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
@@ -1028,7 +1201,7 @@
                 header.classList.remove('header-scrolled');
             }
         });
-        
+
         // Parallax scrolling effect
         window.addEventListener('scroll', function() {
             const scrolled = window.pageYOffset;
@@ -1040,7 +1213,7 @@
                 layer.style.transform = `translate3d(0, ${yPos}px, 0)`;
             });
         });
-        
+
         // Fade-in animation on scroll
         const fadeElements = document.querySelectorAll('.fade-in');
         
@@ -1054,14 +1227,14 @@
                 }
             });
         };
-        
+
         // Check on load and scroll
         window.addEventListener('scroll', fadeInOnScroll);
         window.addEventListener('load', fadeInOnScroll);
-        
+
         // Initialize fade-in for elements already in view
         fadeInOnScroll();
-        
+
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -1076,8 +1249,18 @@
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
+                    
+                    // Close mobile menu if open
+                    closeMobileMenu();
                 }
             });
+        });
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileNavPanel.classList.contains('active')) {
+                closeMobileMenu();
+            }
         });
     </script>
 </body>
