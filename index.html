@@ -91,6 +91,14 @@
             background-color: var(--light-gray);
         }
         
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-40 {
+            margin-top: 40px;
+        }
+        
         /* Header & Navigation */
         header {
             position: fixed;
@@ -99,48 +107,43 @@
             width: 100%;
             z-index: 1000;
             background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 15px var(--shadow);
             transition: var(--transition);
+            padding: 15px 0;
         }
         
         .header-scrolled {
             padding: 5px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            background-color: var(--white);
         }
         
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
         }
         
         .logo {
             display: flex;
             align-items: center;
+            gap: 12px;
         }
         
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--soft-blue));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            color: var(--white);
-            font-size: 1.8rem;
-            font-weight: 700;
+        .logo-img {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
         }
         
-        .logo-text {
+        .logo-name {
             font-family: 'Quicksand', sans-serif;
+            font-size: 1.6rem;
             font-weight: 700;
-            font-size: 1.8rem;
             color: var(--dark-text);
+            white-space: nowrap;
         }
         
-        .logo-text span {
+        .logo-name strong {
             color: var(--primary-blue);
         }
         
@@ -228,6 +231,9 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--dark-text);
+            z-index: 1001;
+            background: none;
+            border: none;
         }
         
         /* Hero Section */
@@ -264,6 +270,8 @@
             top: 0;
             left: 0;
             z-index: 1;
+            perspective: 1px;
+            overflow: hidden;
         }
         
         .parallax-layer {
@@ -274,30 +282,27 @@
             background-repeat: no-repeat;
             background-position: center;
             opacity: 0.7;
+            will-change: transform;
         }
         
         .layer-1 {
             background-image: url('https://cdn.pixabay.com/photo/2016/11/14/03/16/book-1822474_1280.png');
             background-position: 80% 20%;
-            transform: translateZ(-2px) scale(3);
         }
         
         .layer-2 {
             background-image: url('https://cdn.pixabay.com/photo/2016/09/10/17/18/book-1659717_1280.png');
             background-position: 20% 70%;
-            transform: translateZ(-4px) scale(5);
         }
         
         .layer-3 {
             background-image: url('https://cdn.pixabay.com/photo/2016/09/10/11/11/microscope-1659136_1280.png');
             background-position: 90% 80%;
-            transform: translateZ(-6px) scale(7);
         }
         
         .layer-4 {
             background-image: url('https://cdn.pixabay.com/photo/2012/04/13/20/37/palette-33647_1280.png');
             background-position: 10% 30%;
-            transform: translateZ(-8px) scale(9);
         }
         
         /* Cards */
@@ -318,6 +323,9 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         
         .card:hover {
@@ -345,17 +353,13 @@
         
         /* Why Choose Us */
         .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
             margin-top: 40px;
         }
         
         .feature {
-            flex: 1;
-            min-width: 250px;
-            max-width: 300px;
             text-align: center;
             padding: 20px;
         }
@@ -441,20 +445,15 @@
         
         /* Admissions */
         .admissions-steps {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 30px;
             margin: 40px 0;
         }
         
         .step {
-            flex: 1;
-            min-width: 200px;
-            max-width: 250px;
             text-align: center;
             padding: 20px;
-            position: relative;
         }
         
         .step-number {
@@ -476,6 +475,10 @@
             background-color: var(--dark-text);
             color: var(--white);
             padding: 60px 0 30px;
+        }
+        
+        footer .logo-img {
+            height: 42px;
         }
         
         .footer-content {
@@ -548,6 +551,12 @@
         }
         
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 95%;
+            }
+        }
+        
         @media (max-width: 992px) {
             h1 {
                 font-size: 2.8rem;
@@ -555,6 +564,10 @@
             
             h2 {
                 font-size: 2.2rem;
+            }
+            
+            .nav-links li {
+                margin-left: 20px;
             }
         }
         
@@ -565,27 +578,29 @@
             
             .nav-links {
                 position: fixed;
-                top: 80px;
+                top: 0;
                 left: 0;
                 width: 100%;
+                height: 100vh;
                 background-color: var(--white);
                 flex-direction: column;
                 align-items: center;
+                justify-content: center;
                 padding: 20px 0;
-                box-shadow: 0 10px 20px var(--shadow);
-                transform: translateY(-100%);
+                transform: translateX(-100%);
                 opacity: 0;
                 transition: var(--transition);
                 z-index: 999;
             }
             
             .nav-links.active {
-                transform: translateY(0);
+                transform: translateX(0);
                 opacity: 1;
             }
             
             .nav-links li {
                 margin: 15px 0;
+                margin-left: 0;
             }
             
             .nav-cta {
@@ -607,6 +622,14 @@
             section {
                 padding: 60px 0;
             }
+            
+            .logo-name {
+                font-size: 1.2rem;
+            }
+            
+            .logo-img {
+                height: 40px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -626,28 +649,13 @@
                 padding: 10px 20px;
             }
             
-            .card-grid, .facilities-grid, .gallery {
+            .card-grid, .facilities-grid, .gallery, .features, .admissions-steps {
                 grid-template-columns: 1fr;
             }
-            /* Logo image sizing */
-.logo-img {
-    height: 48px;       /* ✅ perfect for header */
-    width: auto;
-    object-fit: contain;
-}
-
-/* Slightly smaller logo in footer */
-footer .logo-img {
-    height: 42px;
-}
-
-/* Mobile adjustment */
-@media (max-width: 768px) {
-    .logo-img {
-        height: 40px;
-    }
-}
-
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -656,10 +664,10 @@ footer .logo-img {
     <header id="header">
         <div class="container">
             <nav>
-               <div class="logo">
-    <img src="wunderkindscho-logo.PNG" alt="Wunderkind Academy Logo" class="logo-img">
-</div>
-
+                <div class="logo">
+                    <img src="wunderkindscho-logo.PNG" alt="Wunderkind Academy Logo" class="logo-img">
+                    <span class="logo-name">Wunderkind <strong>Academy</strong></span>
+                </div>
                 
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
@@ -675,9 +683,9 @@ footer .logo-img {
                     <a href="https://school-management.example.com" target="_blank" class="btn btn-primary">Management System Login</a>
                 </div>
                 
-                <div class="mobile-menu-btn">
+                <button class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
-                </div>
+                </button>
             </nav>
         </div>
     </header>
@@ -685,17 +693,17 @@ footer .logo-img {
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="parallax-bg">
-            <div class="parallax-layer layer-1"></div>
-            <div class="parallax-layer layer-2"></div>
-            <div class="parallax-layer layer-3"></div>
-            <div class="parallax-layer layer-4"></div>
+            <div class="parallax-layer layer-1" data-speed="0.2"></div>
+            <div class="parallax-layer layer-2" data-speed="0.4"></div>
+            <div class="parallax-layer layer-3" data-speed="0.6"></div>
+            <div class="parallax-layer layer-4" data-speed="0.8"></div>
         </div>
         
         <div class="container">
             <div class="hero-content fade-in">
                 <h1>Nurturing Young Minds for a Brighter Future</h1>
                 <p>At Wunderkind Academy, we provide excellence in academics, creativity, and character development. Our holistic approach prepares students to thrive in an ever-changing world.</p>
-                <a href="https://school-management.example.com" target="_blank" class="btn btn-primary btn-hero">Go to School Management System</a>
+                <a href="https://school-management.example.com" target="_blank" class="btn btn-primary">Go to School Management System</a>
             </div>
         </div>
     </section>
@@ -830,7 +838,7 @@ footer .logo-img {
                 </div>
                 
                 <div class="facility-card fade-in">
-                    <div class="facility-img" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-1.2.1&auto=format&fit=crop&w-800&q=80');"></div>
+                    <div class="facility-img" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
                     <div class="facility-overlay">
                         <h3>Computer Lab</h3>
                         <p>Modern computing facilities with latest technology</p>
@@ -946,17 +954,16 @@ footer .logo-img {
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                  <div class="logo">
-    <img src="wunderkindscho-logo.PNG" alt="Wunderkind Academy Logo" class="logo-img">
-</div>
-
+                    <div class="logo">
+                        <img src="wunderkindscho-logo.PNG" alt="Wunderkind Academy Logo" class="logo-img">
+                    </div>
                     <p>Nurturing Young Minds for a Brighter Future since 2005.</p>
                     
                     <div class="social-icons">
-                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
@@ -964,7 +971,7 @@ footer .logo-img {
                     <h3>Contact Us</h3>
                     <p><i class="fas fa-map-marker-alt"></i> Kishiri Mwanza Tanzania</p>
                     <p><i class="fas fa-phone"></i> +255 749 281 607</p>
-                    <p><i class="fas fa-envelope"></i>director@wunderkindacademyschool.org</p>
+                    <p><i class="fas fa-envelope"></i> director@wunderkindacademyschool.org</p>
                     <p><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 5:00 PM</p>
                 </div>
                 
@@ -987,17 +994,28 @@ footer .logo-img {
     <script>
         // Mobile menu toggle
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-            this.querySelector('i').classList.toggle('fa-bars');
-            this.querySelector('i').classList.toggle('fa-times');
+            const navLinks = document.querySelector('.nav-links');
+            const icon = this.querySelector('i');
+            
+            navLinks.classList.toggle('active');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
         });
         
         // Close mobile menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
-                document.querySelector('.nav-links').classList.remove('active');
-                document.querySelector('.mobile-menu-btn i').classList.remove('fa-times');
-                document.querySelector('.mobile-menu-btn i').classList.add('fa-bars');
+                const navLinks = document.querySelector('.nav-links');
+                const menuBtnIcon = document.querySelector('.mobile-menu-btn i');
+                
+                navLinks.classList.remove('active');
+                menuBtnIcon.classList.remove('fa-times');
+                menuBtnIcon.classList.add('fa-bars');
             });
         });
         
@@ -1017,9 +1035,9 @@ footer .logo-img {
             const parallaxLayers = document.querySelectorAll('.parallax-layer');
             
             parallaxLayers.forEach(layer => {
-                const speed = layer.getAttribute('data-speed') || 0.5;
+                const speed = parseFloat(layer.getAttribute('data-speed'));
                 const yPos = -(scrolled * speed);
-                layer.style.transform = `translate3d(0, ${yPos}px, 0) scale(${1 + speed})`;
+                layer.style.transform = `translate3d(0, ${yPos}px, 0)`;
             });
         });
         
@@ -1047,13 +1065,13 @@ footer .logo-img {
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
                 const targetId = this.getAttribute('href');
                 if(targetId === '#') return;
                 
                 const targetElement = document.querySelector(targetId);
                 if(targetElement) {
+                    e.preventDefault();
+                    
                     window.scrollTo({
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
@@ -1061,19 +1079,6 @@ footer .logo-img {
                 }
             });
         });
-        
-        // Add data-speed attributes to parallax layers
-        document.addEventListener('DOMContentLoaded', function() {
-            const layers = document.querySelectorAll('.parallax-layer');
-            const speeds = [0.2, 0.4, 0.6, 0.8];
-            
-            layers.forEach((layer, index) => {
-                layer.setAttribute('data-speed', speeds[index]);
-            });
-        });
     </script>
 </body>
-
 </html>
-
-
