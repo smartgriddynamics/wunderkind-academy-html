@@ -629,6 +629,25 @@
             .card-grid, .facilities-grid, .gallery {
                 grid-template-columns: 1fr;
             }
+            /* Logo image sizing */
+.logo-img {
+    height: 48px;       /* ✅ perfect for header */
+    width: auto;
+    object-fit: contain;
+}
+
+/* Slightly smaller logo in footer */
+footer .logo-img {
+    height: 42px;
+}
+
+/* Mobile adjustment */
+@media (max-width: 768px) {
+    .logo-img {
+        height: 40px;
+    }
+}
+
         }
     </style>
 </head>
@@ -1056,4 +1075,5 @@
 </body>
 
 </html>
+
 
